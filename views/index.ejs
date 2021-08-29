@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background: rgba(200, 200, 200);
+        padding-top: 200px;
+      }
+      .main_div {
+        display: flex;
+        height: auto;
+        margin: auto;
+        width: 1000px;
+        box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+        background: white;
+      }
+      .left_div,
+      .right_div {
+        border: 1px solid black;
+        height: 320px;
+      }
+      .left_div {
+        width: 45%;
+
+        padding: 20px;
+      }
+      .right_div {
+        width: 55%;
+      }
+      .left_div_inner {
+        border: 2px dashed rgba(150, 150, 150);
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+      .left_div_inner textarea {
+        height: 90%;
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        top: 0px;
+        width: 93%;
+        margin: auto;
+        outline: none;
+        font-family: cursive;
+        font-size: 13px;
+        border: none;
+      }
+      .right_div p {
+        height: 15px;
+        font-family: cursive;
+        font-size: 15px;
+        color: rgba(150, 150, 150);
+        font-weight: bold;
+      }
+      .top_div {
+        height: auto;
+        width: 100%;
+        border: 2px solid black;
+        padding-left: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main_div">
+      <div class="left_div">
+        <div class="left_div_inner">
+          <textarea name="" id="translated_text" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+
+      <div class="right_div">
+        <div class="top_div">
+          <p>Enter Text</p>
+          <input type="text" />
+          <button>submit</button>
+
+          <select name="" id="to">
+            <option value="---">Select</option>
+            <option value="ta-tamil">Tamil</option>
+            <option value="en-english">English</option>
+            <option value="ml-malayalam">Malayalam</option>
+            <option value="hi-hindi">Hindi</option>
+            <option value="ur-urdu">Urdu</option>
+            <option value="ar-arabic">Latin</option>
+            <option value="kn-Kannada">Kannada</option>
+            <option value="te-telugu">Telugu</option>
+            <option value="ja-Japanese">Japanese</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      document.querySelector("button").onclick = function () {
+        var translated_text = document.querySelector("#translated_text");
+        var text = document.querySelector(".top_div input").value;
+        var to = document.querySelector(".top_div #to").value;
+
+        if (text == undefined || text == "") {
+          alert("please enter any text first");
+        } else if (to == "---") {
+          alert("please enter the language to be converting");
+        } else {
+          $.ajax({
+            type: "post",
+            url: "/translate",
+            data: "text=" + text + "&to=" + to,
+            success: function (result) {
+              translated_text.value = result;
+            },
+          });
+        }
+      };
+    </script>
+  </body>
+</html>
