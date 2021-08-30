@@ -1,8 +1,8 @@
 {
-  "name": "translat",
+  "name": "translate",
   "version": "1.0.0",
   "description": "",
-  "main": "translat.js",
+  "main": "translate.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
