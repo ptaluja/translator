@@ -5,6 +5,8 @@ var url = require("url");
 
 const fs = require("fs");
 
+var port_number = process.env.PORT || 5000;
+
 //register view engine
 app.use(bparser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -65,13 +67,13 @@ app.post("/translate", function (req, res) {
         if (err) {
           onsole.log(err);
         } else {
-          var arr = ["en", "hi", "ur", "ml", "ja", "ta", "kn", "te", "ar"];
+          var arr = ["en", "hi", "ur", "ml", "bn", "ta", "kn", "te", "ar"];
           var arr2 = [
             "english",
             "hindi",
             "urdu",
             "malayalam",
-            "japanese",
+            "bengali",
             "tamil",
             "kannada",
             "telugu",
@@ -113,4 +115,4 @@ app.post("/translate", function (req, res) {
   });
 });
 
-app.listen(5000);
+app.listen(port_number);
